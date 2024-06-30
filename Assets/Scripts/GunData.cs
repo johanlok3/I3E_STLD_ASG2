@@ -27,8 +27,11 @@ public class GunData : MonoBehaviour
     public LayerMask whatIsEnemy;
 
     //Graphics
-    public GameObject muzzleFlash, bulletHoleGraphic;
+    public GameObject muzzleFlash;
+    public Transform muzzleFlashPosition;
     public TextMeshProUGUI text;
+    public AudioSource gunSound;
+    public AudioSource reloadSound;
 
     private void Awake()
     {
@@ -58,6 +61,11 @@ public class GunData : MonoBehaviour
     }
     private void Shoot()
     {
+        //Graphics
+        GameObject Flash = Instantiate(muzzleFlash, muzzleFlashPosition);
+        Destroy(Flash, 0.1f);
+
+
         readyToShoot = false;
 
         //RayCast
@@ -65,15 +73,11 @@ public class GunData : MonoBehaviour
         {
             Debug.Log(rayHit.collider.name);
 
-            // if (rayHit.collider.CompareTag("Enemy"))
-                // rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
+            //if (rayHit.collider.CompareTag("Enemy"))
+            //rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
         }
 
-
-
-        //Graphics
-        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
-        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        gunSound.Play();
 
         bulletsLeft--;
         bulletsShot--;
@@ -85,6 +89,7 @@ public class GunData : MonoBehaviour
     }
 
 
+
     private void ResetShot()
     {
         readyToShoot = true;
@@ -93,6 +98,8 @@ public class GunData : MonoBehaviour
 
     private void Reload()
     {
+        reloadSound.Play();
+
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
     }
