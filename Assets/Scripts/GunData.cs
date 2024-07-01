@@ -59,7 +59,7 @@ public class GunData : MonoBehaviour
             Shoot();
         }
     }
-    private void Shoot()
+    public void Shoot()
     {
         //Graphics
         GameObject Flash = Instantiate(muzzleFlash, muzzleFlashPosition);
@@ -73,8 +73,8 @@ public class GunData : MonoBehaviour
         {
             Debug.Log(rayHit.collider.name);
 
-            //if (rayHit.collider.CompareTag("Enemy"))
-            //rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
+            if (rayHit.collider.CompareTag("Enemy"))
+            rayHit.collider.GetComponent<EnemyAi>().TakeDamage(damage);
         }
 
         gunSound.Play();

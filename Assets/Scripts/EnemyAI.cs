@@ -1,8 +1,12 @@
-
+/*
+ * Author: Johan Loke
+ * Date: 30/6/2024
+ * Description: Script for Gundata    
+*/
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAiTutorial : MonoBehaviour
+public class EnemyAi : MonoBehaviour
 {
     public NavMeshAgent agent;
 
@@ -14,6 +18,7 @@ public class EnemyAiTutorial : MonoBehaviour
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
+    public LayerMask whatIsGround, whatIsPlayer;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -35,8 +40,8 @@ public class EnemyAiTutorial : MonoBehaviour
         agent.SetDestination(Player.position);
 
         //Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
