@@ -16,11 +16,10 @@ public class Player : MonoBehaviour
     // This textbox is for score
     public TextMeshProUGUI scoreText;
 
+    public int health;
+
     // Currentscore of the player is set to 0
     public int currentScore = 0;
-
-    // Player does not have keycard so this is false
-    public bool keyCard = false;
 
     // Updates players current score in real time
     public void IncreaseScore(int scoreToAdd)
@@ -32,11 +31,9 @@ public class Player : MonoBehaviour
         scoreText.text = currentScore.ToString();
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void DamageTaken(int damage)
     {
-        keyCard = false;
+        health -= damage;
     }
 
     // Update is called once per frame

@@ -10,7 +10,7 @@ using UnityEngine;
 public class Coins : MonoBehaviour
 {
     // Values for the coin collectible including score 
-    int myScore = 5;
+    int myScore = 10;
     string myItem = "Coins";
     bool isCollected = false;
     bool itemCollected = false;
