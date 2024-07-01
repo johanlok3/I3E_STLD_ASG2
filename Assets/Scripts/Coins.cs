@@ -7,12 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coins : MonoBehaviour, IInteractable
+public class Coins : MonoBehaviour
 {
-    [SerializeField]
-    private AudioClip collectAudio;
-
-
     // Values for the coin collectible including score 
     int myScore = 5;
     string myItem = "Coins";
@@ -22,22 +18,30 @@ public class Coins : MonoBehaviour, IInteractable
 
 
     // Destroys the coin when collected and prints out message
-    public void Interact()
+    public void Collected()
     {
-        AudioSource.PlayClipAtPoint(collectAudio, transform.position, 1f);
         Debug.Log("Coin collected.");
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Makes it so the coin only gets collected if the player collides with it
+        if (collision.gameObject.tag == "Player")
+        {
+            // Increasescore function will get called, adding the score of the coin
+            // Collected function will also get called
+            // Deductcollectible function will get called, deducting the total collectibles remaining by 1
+            collision.gameObject.GetComponent<Player>().IncreaseScore(myScore);
+            Collected();
+        }
+    }
+
 
     void Spawn()
     {
         
     
-    }
-
-    void Expire()
-    {
-
     }
 
 

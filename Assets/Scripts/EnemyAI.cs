@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAi : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
 
@@ -101,8 +101,10 @@ public class EnemyAi : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) ;
-        Destroy(gameObject);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 

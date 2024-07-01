@@ -74,7 +74,7 @@ public class GunData : MonoBehaviour
             Debug.Log(rayHit.collider.name);
 
             if (rayHit.collider.CompareTag("Enemy"))
-            rayHit.collider.GetComponent<EnemyAi>().TakeDamage(damage);
+            rayHit.collider.GetComponent<EnemyAI>().TakeDamage(damage);
         }
 
         gunSound.Play();

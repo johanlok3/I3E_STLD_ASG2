@@ -12,12 +12,23 @@ public class TriggerDoor2 : MonoBehaviour
     [SerializeField] public Animator myDoor = null;
 
     [SerializeField] public bool openTrigger = false;
+    [SerializeField] public bool closeTrigger = false;
 
     [SerializeField] public string doorOpen = "DoorOpen";
+    [SerializeField] public string doorClose = "DoorClose";
 
     public void OnTriggerEnter(Collider other)
     {
-        myDoor.Play(doorOpen, 0, 0.0f);
-        gameObject.SetActive(false);
+        if (openTrigger)
+        {
+            myDoor.Play(doorOpen, 0, 0.0f);
+            gameObject.SetActive(false);
+        }
+
+        else if (closeTrigger)
+        {
+            myDoor.Play(doorClose, 0, 0.0f);
+            gameObject.SetActive(false);
+        }
     }
 }
